@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    # Nome do deployment
+    name: {{ .Values.nameDeployment }}
+# Especificação do pod
+spec:
+    replicas: {{ .Values.replicaCount}}
+    selector:
+        matchLabels:
+            app: {{ .Values.nameDeployment }}
+    template:
+        metadata:
+            labels:
+                app: {{ .Values.nameDeployment }}
+        spec:
+            containers:
+              - name: {{ .Values.container.name}}
+                image: {{ .Values.image.repository}}
+                resources:
+                    limits:
+                        cpu: "1"
+                    requests:
+                        cpu: 500m
+                ports:
+                - containerPort: 80
+                env:
+                - name: PORT
+                  value: "80"
