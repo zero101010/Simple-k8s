@@ -1,0 +1,57 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: petdetailsservice
+  labels:
+    app: petdetailsservice
+spec:
+  ports:
+  - port: 9081
+    name: http
+  selector:
+    app: petdetailsservice
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: petdetailsservice-v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: petdetailsservice
+  template:
+    metadata:
+      labels:
+        app: petdetailsservice
+        version: v1
+    spec:
+      containers:
+      - name: petdetailsservice
+        image: jacksonlima91/petdetailservice:v1
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 9081
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: petdetailsservice-v2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: petdetailsservice
+  template:
+    metadata:
+      labels:
+        app: petdetailsservice
+        version: v2
+    spec:
+      containers:
+      - name: petdetailsservice
+        image: jacksonlima91/petdetailservice:v1
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 9081

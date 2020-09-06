@@ -1,0 +1,34 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: petmedicalhistoryservice
+  labels:
+    app: petmedicalhistoryservice
+spec:
+  ports:
+  - port: 9082
+    name: http
+  selector:
+    app: petmedicalhistoryservice
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: petmedicalhistoryservice-v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: petmedicalhistoryservice
+  template:
+    metadata:
+      labels:
+        app: petmedicalhistoryservice
+        version: v1
+    spec:
+      containers:
+      - name: petmedicalhistoryservice
+        image: jacksonlima91/petmedicalhistoryservice:v1
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 9082
