@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simple-apm
+spec:
+  selector:
+    matchLabels:
+      app: simple-apm
+  template:
+    metadata:
+      labels:
+        app: simple-apm
+    spec:
+      containers:
+      - name: simple-apm
+        image: zero101010/api-server-apm
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 3000

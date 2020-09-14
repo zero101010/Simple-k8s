@@ -1,0 +1,10 @@
+apiVersion: v1 ## Versão da api do kubernets
+kind: Pod ## tipo de serviço implantado
+metadata: ## dados relacionados ao pod
+  name: myapp-pod ## Nome do pod
+  labels: ## tagear um grupo de pods que possuem o app como myapp
+    app: myapp
+  spec:   ## especificações relacionados aos containers
+    containers:
+      - name: myapp
+        image: nginx
