@@ -5,7 +5,7 @@ metadata: ## dadps referentes ao deployment como nome
   labels:
     app: nginx-label-deployment
 spec: ## especificações do deployment, principalmente o selector que vai selecionar qual pod vai acoplar
-  replicas: 2
+  replicas: 400
   selector:
     matchLabels: ## Qual pod vai ser selecionado que possue o mesmo app
       app: nginx-pod
